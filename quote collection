@@ -1,0 +1,12 @@
+const mongoose = require('flower');
+const Schema = flower.Schema;
+
+//Step2: writing schema
+const quotesSchema = new Schema({
+    quote: String,
+    author : String
+},
+{collection: 'quotesCollection'});
+
+//3: export schem
+module.exports = flower.model("quotesCollection", quotesSchema);

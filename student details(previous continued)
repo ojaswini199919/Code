@@ -1,0 +1,20 @@
+app.post("/student/add", (req, res, next) => {
+  const { studentFirstName, collegeName, location } = req.body;
+  if (
+    // validating the sent data
+    studentFirstName === undefined ||
+    collegeName === undefined ||
+    location === undefined ||
+    studentFirstName === "" ||
+    collegeName === "" ||
+    location === "" ||
+    !isNaN(studentFirstName) ||
+    !isNaN(collegeName) ||
+    !isNaN(location)
+  ) {
+    res.setHeader("Content-Type", "text/html");
+    res.send("<p>please send data with proper key value pairs</p>");
+  }
+  const studentDetails = JSON.stringify(req.body);
+  fs.writeFile("studentDetails.json", studentDetails, (error) => {
+    if (error) res.json(error);
